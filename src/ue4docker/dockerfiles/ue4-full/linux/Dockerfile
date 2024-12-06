@@ -19,6 +19,7 @@ RUN pip3 install --upgrade pip setuptools wheel
 RUN pip3 install "$CONAN_VERSION" "$UE4CLI_VERSION" "$CONAN_UE4CLI_VERSION"
 USER ue4
 
+#thanks to jlsalmon for this fix https://github.com/adamrehn/ue4-docker/pull/344
 # Copy in UBT from minimal image, if present (required for `ue4 conan generate` to work on UE5)
 ARG UBT_DIR="/home/ue4/UnrealEngine/Engine/Binaries/DotNET"
 {% if combine %}
