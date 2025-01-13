@@ -1,5 +1,5 @@
 ARG UE4CLI_VERSION="ue4cli>=0.0.45"
-ARG CONAN_UE4CLI_VERSION="conan-ue4cli>=0.0.27"
+ARG CONAN_UE4CLI_VERSION="git+https://github.com/metalclaw/conan-ue4cli@master"
 ARG CONAN_VERSION="conan>=1.59.0,<2"
 {% if combine %}
 FROM source as conan
@@ -54,7 +54,7 @@ USER ue4
 ENV UE4CLI_CONFIG_DIR=/home/ue4/.config/ue4cli
 
 # Copy the Conan configuration settings and package cache from the previous build stage
-COPY --from=conan --chown=ue4:ue4 /home/ue4/.conan /home/ue4/.conan
+COPY --from=conan --chown=ue4:ue4 /home/ue4/.conan2 /home/ue4/.conan
 
 # Install conan-ue4cli (just generate the profile, since we've already copied the generated packages)
 RUN ue4 setroot /home/ue4/UnrealEngine
