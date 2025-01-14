@@ -101,6 +101,7 @@ RUN mkdir "$UE_GITDEPS"
 # When running with BuildKit, we use a cache mount to cache the dependency data across multiple build invocations
 WORKDIR /home/ue4/UnrealEngine
 RUN --mount=type=cache,target=/home/ue4/gitdeps,uid=1000,gid=1000 sudo apt-get update && \
+    chmod -R 755 ./ && chmod +x ./Setup.sh && chmod +x Engine/Build/BatchFiles/Linux/GitDependencies.sh && \
 	./Setup.sh {{ gitdependencies_args }} && \
 	sudo rm -rf /var/lib/apt/lists/*
 
